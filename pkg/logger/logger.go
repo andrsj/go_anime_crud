@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/rs/zerolog"
 )
+
+const skipFrameCount = 3
 
 type Interface interface {
 	Debug(message interface{}, args ...interface{})
@@ -39,11 +42,33 @@ func New(level string) *Logger {
 
 	zerolog.SetGlobalLevel(l)
 
-	skipFrameCount := 3
 	logger := zerolog.
-		New(os.Stdout).
+		New(zerolog.ConsoleWriter{
+			Out:        os.Stdout,
+			TimeFormat: time.RFC3339,
+			FormatLevel: func(i interface{}) string {
+				return strings.ToUpper(fmt.Sprintf("[%s]", i))
+			},
+			FormatMessage: func(i interface{}) string {
+				return fmt.Sprintf("| %s", i)
+			},
+			// FormatCaller: func(i interface{}) string {
+			// 	return filepath.Base(fmt.Sprintf("%s", i))
+			// },
+		}).
 		With().
 		Timestamp().
+		// Caller(). // ?
+		// CallerWithSkipFrameCount(-3). // runtime/extern.go func runtime.Caller
+		// CallerWithSkipFrameCount(-2). // zerolog/event.go func hook.Run -> caller > runtime.Caller
+		// CallerWithSkipFrameCount(-1). // zerolog/event.go func hook.Run -> caller
+		// CallerWithSkipFrameCount(0). // zerolog/event.go func hook.Run
+		// CallerWithSkipFrameCount(1). // zerolog/event.go func Msg
+		// CallerWithSkipFrameCount(2). // pkg/logger/logger.go func log
+		// CallerWithSkipFrameCount(3). // pkg/logger/logger.go func Info
+		// CallerWithSkipFrameCount(4). // internal/app/app.go
+		// CallerWithSkipFrameCount(5). // actual our caller => zerolog.CallerSkipFrameCount + skipFrameCount
+		// CallerWithSkipFrameCount(6). // proc.go
 		CallerWithSkipFrameCount(zerolog.CallerSkipFrameCount + skipFrameCount).
 		Logger()
 
