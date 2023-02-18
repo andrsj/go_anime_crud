@@ -1,6 +1,8 @@
 package memory
 
 import (
+	"fmt"
+
 	"github.com/andrsj/go_anime_crud/internal/app/model"
 	"github.com/andrsj/go_anime_crud/internal/app/repository"
 	"github.com/andrsj/go_anime_crud/pkg/logger"
@@ -45,7 +47,7 @@ func (s *ServiceInMemory) GetAnimeCharacter(id model.IdAC) (*model.AnimeCharacte
 		s.logger.Error(err.Error())
 		return nil, err
 	}
-	s.logger.Info("Returning Anime Character by id: ", id)
+	s.logger.Info(fmt.Sprintf("Returning Anime Character by id: '%d'", id))
 	return AC, nil
 }
 
@@ -66,14 +68,14 @@ func (s *ServiceInMemory) CreateAnimeCharacter(a *model.AnimeCharacter) model.Id
 	if a.Id != 0 {
 		s.logger.Warn("Ignoring ID of Anime Character")
 	}
-	s.logger.Info("Adding Anime Character to memory with id:", s.IndexAC)
+	s.logger.Info(fmt.Sprintf("Adding Anime Character to memory with id: '%d'", s.IndexAC))
 	id := s.IndexAC
 	a.Id = id
 	s.mapAC[id] = a
 
 	s.IndexAC++
 
-	s.logger.Info("Returning id of Anime Character in memory:", id)
+	s.logger.Info(fmt.Sprintf("Returning id of Anime Character in memory: '%d'", id))
 	return id
 }
 
@@ -90,7 +92,7 @@ func (s *ServiceInMemory) UpdateAnimeCharacter(id model.IdAC, a *model.AnimeChar
 		return nil, err
 	}
 
-	s.logger.Info("Updating Anime Character by id:", id)
+	s.logger.Info(fmt.Sprintf("Updating Anime Character by id: '%d'", id))
 	s.mapAC[id] = a
 	return a, nil
 }
@@ -108,7 +110,7 @@ func (s *ServiceInMemory) DeleteAnimeCharacter(id model.IdAC) error {
 		return err
 	}
 
-	s.logger.Info("Deleting Anime Character by id:", id)
+	s.logger.Info(fmt.Sprintf("Deleting Anime Character by id: '%d'", id))
 	delete(s.mapAC, id)
 
 	return nil

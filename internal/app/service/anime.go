@@ -1,6 +1,8 @@
 package service
 
 import (
+	"fmt"
+
 	"github.com/andrsj/go_anime_crud/internal/app/model"
 	"github.com/andrsj/go_anime_crud/internal/app/repository"
 	"github.com/andrsj/go_anime_crud/pkg/logger"
@@ -35,7 +37,7 @@ func (s *Service) Ping() string {
 }
 
 func (s *Service) GetAnimeCharacter(id model.IdAC) (*model.AnimeCharacter, error) {
-	s.logger.Info("Getting one Anime Character by id:", id)
+	s.logger.Info(fmt.Sprintf("Getting one Anime Character by id '%d'", id))
 	AC, err := s.repository.GetAnimeCharacter(id)
 	if err != nil {
 		return nil, err
@@ -56,7 +58,7 @@ func (s *Service) CreateAnimeCharacter(a *model.AnimeCharacter) model.IdAC {
 }
 
 func (s *Service) UpdateAnimeCharacter(id model.IdAC, a *model.AnimeCharacter) (*model.AnimeCharacter, error) {
-	s.logger.Info("Updating one Anime Character by id:", id)
+	s.logger.Info(fmt.Sprintf("Updating one Anime Character by id '%d'", id))
 	AC, err := s.repository.UpdateAnimeCharacter(id, a)
 	if err != nil {
 		return nil, err
@@ -65,7 +67,7 @@ func (s *Service) UpdateAnimeCharacter(id model.IdAC, a *model.AnimeCharacter) (
 }
 
 func (s *Service) DeleteAnimeCharacter(id model.IdAC) error {
-	s.logger.Info("Deleting one Anime Character by id:", id)
+	s.logger.Info(fmt.Sprintf("Deleting one Anime Character by id '%d'", id))
 	err := s.repository.DeleteAnimeCharacter(id)
 	if err != nil {
 		return err

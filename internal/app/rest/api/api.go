@@ -1,4 +1,4 @@
-package endpoint
+package api
 
 import (
 	"fmt"
@@ -11,19 +11,19 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type Endpoint struct {
+type API struct {
 	s service.Interface
 	l logger.Interface
 }
 
-func New(s service.Interface, l logger.Interface) *Endpoint {
-	return &Endpoint{
+func New(s service.Interface, l logger.Interface) *API {
+	return &API{
 		s: s,
 		l: l,
 	}
 }
 
-func (e *Endpoint) Status(ctx echo.Context) error {
+func (e *API) Status(ctx echo.Context) error {
 	e.l.Info("Got a request :)")
 
 	data := e.s.Ping()
@@ -38,24 +38,33 @@ func (e *Endpoint) Status(ctx echo.Context) error {
 	return nil
 }
 
+func (a *API) parseID(ctx echo.Context) (model.IdAC, error) {
+	strID := ctx.Param("id")
+	id, err := strconv.Atoi(strID)
+	if err != nil {
+		a.l.Error(err.Error())
+		return 0, echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	return model.IdAC(id), nil
+}
+
 // POST /api/ac/
-func (e *Endpoint) CreateAnimeCharacter(ctx echo.Context) error {
+func (a *API) CreateAnimeCharacter(ctx echo.Context) error {
 	ac := new(model.AnimeCharacter)
 	if err := ctx.Bind(ac); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
-	e.s.CreateAnimeCharacter(ac)
+	a.s.CreateAnimeCharacter(ac)
 	return ctx.JSON(http.StatusCreated, ac)
 }
 
 // GET /api/ac/:id
-func (e *Endpoint) GetAnimeCharacter(ctx echo.Context) error {
-	str_id := ctx.Param("id")
-	id, err := strconv.Atoi(str_id)
+func (a *API) GetAnimeCharacter(ctx echo.Context) error {
+	id, err := a.parseID(ctx)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return err
 	}
-	ac, err := e.s.GetAnimeCharacter(model.IdAC(id))
+	ac, err := a.s.GetAnimeCharacter(id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -63,23 +72,22 @@ func (e *Endpoint) GetAnimeCharacter(ctx echo.Context) error {
 }
 
 // GET /api/ac/
-func (e *Endpoint) GetAllAnimeCharacters(ctx echo.Context) error {
-	slcAC := e.s.GetAllAnimeCharacters()
+func (a *API) GetAllAnimeCharacters(ctx echo.Context) error {
+	slcAC := a.s.GetAllAnimeCharacters()
 	return ctx.JSON(http.StatusOK, slcAC)
 }
 
 // PUT /api/ac/:id
-func (e *Endpoint) UpdateAnimeCharacter(ctx echo.Context) error {
-	str_id := ctx.Param("id")
-	id, err := strconv.Atoi(str_id)
+func (a *API) UpdateAnimeCharacter(ctx echo.Context) error {
+	id, err := a.parseID(ctx)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return err
 	}
 	ac := new(model.AnimeCharacter)
 	if err := ctx.Bind(ac); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
-	ac, err = e.s.UpdateAnimeCharacter(model.IdAC(id), ac)
+	ac, err = a.s.UpdateAnimeCharacter(model.IdAC(id), ac)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -87,13 +95,12 @@ func (e *Endpoint) UpdateAnimeCharacter(ctx echo.Context) error {
 }
 
 // DELETE /api/ac/:id
-func (e *Endpoint) DeleteAnimeCharacter(ctx echo.Context) error {
-	str_id := ctx.Param("id")
-	id, err := strconv.Atoi(str_id)
+func (a *API) DeleteAnimeCharacter(ctx echo.Context) error {
+	id, err := a.parseID(ctx)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return err
 	}
-	err = e.s.DeleteAnimeCharacter(model.IdAC(id))
+	err = a.s.DeleteAnimeCharacter(model.IdAC(id))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
