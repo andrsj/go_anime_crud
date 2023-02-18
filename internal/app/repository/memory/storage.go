@@ -8,15 +8,15 @@ import (
 	"github.com/andrsj/go_anime_crud/pkg/logger"
 )
 
-type ServiceInMemory struct {
+type RepositoryInMemory struct {
 	logger  logger.Interface
 	mapAC   repository.MapAnimeCharacters
 	IndexAC model.IdAC
 }
 
-func New(l logger.Interface) (*ServiceInMemory, error) {
+func New(l logger.Interface) (*RepositoryInMemory, error) {
 	mapAC := make(repository.MapAnimeCharacters)
-	s := &ServiceInMemory{
+	s := &RepositoryInMemory{
 		logger:  l,
 		mapAC:   mapAC,
 		IndexAC: 1,
@@ -33,7 +33,7 @@ func validateNonZeroId(l logger.Interface, id model.IdAC) error {
 	return nil
 }
 
-func (s *ServiceInMemory) GetAnimeCharacter(id model.IdAC) (*model.AnimeCharacter, error) {
+func (s *RepositoryInMemory) GetAnimeCharacter(id model.IdAC) (*model.AnimeCharacter, error) {
 	err := validateNonZeroId(s.logger, id)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (s *ServiceInMemory) GetAnimeCharacter(id model.IdAC) (*model.AnimeCharacte
 	return AC, nil
 }
 
-func (s *ServiceInMemory) GetAllAnimeCharacters() []*model.AnimeCharacter {
+func (s *RepositoryInMemory) GetAllAnimeCharacters() []*model.AnimeCharacter {
 	result := make([]*model.AnimeCharacter, 0, len(s.mapAC))
 
 	s.logger.Info("Iterating in all Anime Characters in memory")
@@ -64,7 +64,7 @@ func (s *ServiceInMemory) GetAllAnimeCharacters() []*model.AnimeCharacter {
 	return result
 }
 
-func (s *ServiceInMemory) CreateAnimeCharacter(a *model.AnimeCharacter) model.IdAC {
+func (s *RepositoryInMemory) CreateAnimeCharacter(a *model.AnimeCharacter) model.IdAC {
 	if a.Id != 0 {
 		s.logger.Warn("Ignoring ID of Anime Character")
 	}
@@ -79,7 +79,7 @@ func (s *ServiceInMemory) CreateAnimeCharacter(a *model.AnimeCharacter) model.Id
 	return id
 }
 
-func (s *ServiceInMemory) UpdateAnimeCharacter(id model.IdAC, a *model.AnimeCharacter) (*model.AnimeCharacter, error) {
+func (s *RepositoryInMemory) UpdateAnimeCharacter(id model.IdAC, a *model.AnimeCharacter) (*model.AnimeCharacter, error) {
 	err := validateNonZeroId(s.logger, id)
 	if err != nil {
 		return nil, err
@@ -97,7 +97,7 @@ func (s *ServiceInMemory) UpdateAnimeCharacter(id model.IdAC, a *model.AnimeChar
 	return a, nil
 }
 
-func (s *ServiceInMemory) DeleteAnimeCharacter(id model.IdAC) error {
+func (s *RepositoryInMemory) DeleteAnimeCharacter(id model.IdAC) error {
 	err := validateNonZeroId(s.logger, id)
 	if err != nil {
 		return err
