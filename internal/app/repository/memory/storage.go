@@ -41,9 +41,7 @@ func (s *RepositoryInMemory) GetAnimeCharacter(id model.IdAC) (*model.AnimeChara
 
 	AC, ok := s.mapAC[id]
 	if !ok {
-		err := &repository.ACNotFoundError{
-			Id: id,
-		}
+		err := &repository.ACNotFoundError{Id: id}
 		s.logger.Error(err.Error())
 		return nil, err
 	}

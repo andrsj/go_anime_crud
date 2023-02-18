@@ -42,17 +42,22 @@ func (a *API) parseID(ctx echo.Context) (model.IdAC, error) {
 	strID := ctx.Param("id")
 	id, err := strconv.Atoi(strID)
 	if err != nil {
+		err = fmt.Errorf("ID can't be not 'int' value: [GO: %w]", err)
 		a.l.Error(err.Error())
-		return 0, echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return 0, err
 	}
 	return model.IdAC(id), nil
+}
+
+func handleError(ctx echo.Context, code int, err error) error {
+	return ctx.JSON(code, map[string]string{"error": err.Error()})
 }
 
 // POST /api/ac/
 func (a *API) CreateAnimeCharacter(ctx echo.Context) error {
 	ac := new(model.AnimeCharacter)
 	if err := ctx.Bind(ac); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	a.s.CreateAnimeCharacter(ac)
 	return ctx.JSON(http.StatusCreated, ac)
@@ -62,11 +67,11 @@ func (a *API) CreateAnimeCharacter(ctx echo.Context) error {
 func (a *API) GetAnimeCharacter(ctx echo.Context) error {
 	id, err := a.parseID(ctx)
 	if err != nil {
-		return err
+		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	ac, err := a.s.GetAnimeCharacter(id)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	return ctx.JSON(http.StatusOK, ac)
 }
@@ -81,15 +86,15 @@ func (a *API) GetAllAnimeCharacters(ctx echo.Context) error {
 func (a *API) UpdateAnimeCharacter(ctx echo.Context) error {
 	id, err := a.parseID(ctx)
 	if err != nil {
-		return err
+		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	ac := new(model.AnimeCharacter)
 	if err := ctx.Bind(ac); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	ac, err = a.s.UpdateAnimeCharacter(model.IdAC(id), ac)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	return ctx.JSON(http.StatusOK, ac)
 }
@@ -98,11 +103,11 @@ func (a *API) UpdateAnimeCharacter(ctx echo.Context) error {
 func (a *API) DeleteAnimeCharacter(ctx echo.Context) error {
 	id, err := a.parseID(ctx)
 	if err != nil {
-		return err
+		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	err = a.s.DeleteAnimeCharacter(model.IdAC(id))
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	return ctx.NoContent(http.StatusNoContent)
 }
