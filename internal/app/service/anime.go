@@ -8,14 +8,9 @@ import (
 	"github.com/andrsj/go_anime_crud/pkg/logger"
 )
 
-// Warning: This interface is partially duplicated from repository
 type Interface interface {
+	repository.Interface
 	Ping() string
-	GetAnimeCharacter(id model.IdAC) (*model.AnimeCharacter, error)
-	GetAllAnimeCharacters() []*model.AnimeCharacter
-	CreateAnimeCharacter(a *model.AnimeCharacter) model.IdAC
-	UpdateAnimeCharacter(id model.IdAC, a *model.AnimeCharacter) (*model.AnimeCharacter, error)
-	DeleteAnimeCharacter(id model.IdAC) error
 }
 
 type Service struct {
