@@ -1,8 +1,8 @@
 package app
 
 import (
-	"github.com/andrsj/go_anime_crud/internal/app/rest/api"
-	"github.com/andrsj/go_anime_crud/internal/app/service"
+	"github.com/andrsj/go_anime_crud/internal/rest/api"
+	"github.com/andrsj/go_anime_crud/internal/service"
 	"github.com/andrsj/go_anime_crud/pkg/logger"
 	"github.com/labstack/echo/v4"
 )

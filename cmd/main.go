@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 
-	"github.com/andrsj/go_anime_crud/internal/app"
-	"github.com/andrsj/go_anime_crud/internal/app/repository/memory"
-	"github.com/andrsj/go_anime_crud/internal/app/rest/api"
-	"github.com/andrsj/go_anime_crud/internal/app/service"
-	"github.com/andrsj/go_anime_crud/pkg/logger/zerolog"
 	"github.com/labstack/echo/v4"
+
+	"github.com/andrsj/go_anime_crud/internal/app"
+	"github.com/andrsj/go_anime_crud/internal/repository/memory"
+	"github.com/andrsj/go_anime_crud/internal/rest/api"
+	"github.com/andrsj/go_anime_crud/internal/service"
+	"github.com/andrsj/go_anime_crud/pkg/logger/zerolog"
 )
 
 func main() {

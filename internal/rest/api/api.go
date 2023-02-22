@@ -5,10 +5,12 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/andrsj/go_anime_crud/internal/app/model"
-	"github.com/andrsj/go_anime_crud/internal/app/service"
-	"github.com/andrsj/go_anime_crud/pkg/logger"
 	"github.com/labstack/echo/v4"
+
+	"github.com/andrsj/go_anime_crud/internal/model"
+	"github.com/andrsj/go_anime_crud/internal/service"
+	"github.com/andrsj/go_anime_crud/pkg/logger"
+
 )
 
 type API struct {
@@ -89,7 +91,7 @@ func (a *API) UpdateAnimeCharacter(ctx echo.Context) error {
 		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	ac := new(model.AnimeCharacter)
-	if err := ctx.Bind(ac); err != nil {
+	if err = ctx.Bind(ac); err != nil {
 		return handleError(ctx, http.StatusBadRequest, err)
 	}
 	ac, err = a.s.UpdateAnimeCharacter(model.IdAC(id), ac)

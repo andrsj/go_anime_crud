@@ -3,8 +3,8 @@ package service
 import (
 	"fmt"
 
-	"github.com/andrsj/go_anime_crud/internal/app/model"
-	"github.com/andrsj/go_anime_crud/internal/app/repository"
+	"github.com/andrsj/go_anime_crud/internal/model"
+	"github.com/andrsj/go_anime_crud/internal/repository"
 	"github.com/andrsj/go_anime_crud/pkg/logger"
 )
 
