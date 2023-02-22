@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 
-	"github.com/andrsj/go_anime_crud/internal/model"
+	"github.com/andrsj/go_anime_crud/internal/domain/model"
 )
 
 type ACNotFoundError struct {

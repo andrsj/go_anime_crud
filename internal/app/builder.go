@@ -3,17 +3,18 @@ package app
 import (
 	"errors"
 
-	"github.com/andrsj/go_anime_crud/internal/rest/api"
-	"github.com/andrsj/go_anime_crud/internal/service"
-	"github.com/andrsj/go_anime_crud/pkg/logger"
 	"github.com/labstack/echo/v4"
+
+	"github.com/andrsj/go_anime_crud/internal/delivery/rest/api"
+	"github.com/andrsj/go_anime_crud/internal/services/anime"
+	"github.com/andrsj/go_anime_crud/pkg/logger"
 )
 
 type AppBuilder struct {
-	logger  logger.Interface
-	service service.Interface
-	api     *api.API
-	echo    *echo.Echo
+	api           *api.API
+	echo          *echo.Echo
+	logger        logger.Interface
+	anime_service anime.Interface
 }
 
 func NewAppBuilder() *AppBuilder {
@@ -25,8 +26,8 @@ func (b *AppBuilder) WithLogger(logger logger.Interface) *AppBuilder {
 	return b
 }
 
-func (b *AppBuilder) WithService(service service.Interface) *AppBuilder {
-	b.service = service
+func (b *AppBuilder) WithService(service anime.Interface) *AppBuilder {
+	b.anime_service = service
 	return b
 }
 
@@ -41,14 +42,14 @@ func (b *AppBuilder) WithEcho(echo *echo.Echo) *AppBuilder {
 }
 
 func (b *AppBuilder) Build() (*App, error) {
-	if b.logger == nil || b.service == nil || b.api == nil || b.echo == nil {
+	if b.logger == nil || b.anime_service == nil || b.api == nil || b.echo == nil {
 		return nil, errors.New("logger, service, api and echo must be set to build App")
 	}
 
 	return &App{
-		logger:  b.logger,
-		service: b.service,
-		api:     b.api,
-		echo:    b.echo,
+		api:           b.api,
+		echo:          b.echo,
+		logger:        b.logger,
+		anime_service: b.anime_service,
 	}, nil
 }

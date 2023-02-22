@@ -1,17 +1,18 @@
 package app
 
 import (
-	"github.com/andrsj/go_anime_crud/internal/rest/api"
-	"github.com/andrsj/go_anime_crud/internal/service"
-	"github.com/andrsj/go_anime_crud/pkg/logger"
 	"github.com/labstack/echo/v4"
+
+	"github.com/andrsj/go_anime_crud/internal/delivery/rest/api"
+	"github.com/andrsj/go_anime_crud/internal/services/anime"
+	"github.com/andrsj/go_anime_crud/pkg/logger"
 )
 
 type App struct {
-	logger  logger.Interface
-	service service.Interface
-	api     *api.API
-	echo    *echo.Echo
+	api           *api.API
+	echo          *echo.Echo
+	logger        logger.Interface
+	anime_service anime.Interface
 }
 
 func (a *App) Run() error {

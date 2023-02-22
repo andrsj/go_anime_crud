@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/andrsj/go_anime_crud/internal/model"
+	"github.com/andrsj/go_anime_crud/internal/domain/model"
 )
 
 type Interface interface {

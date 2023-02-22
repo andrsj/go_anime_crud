@@ -6,55 +6,47 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"github.com/andrsj/go_anime_crud/internal/app"
-	"github.com/andrsj/go_anime_crud/internal/repository/memory"
-	"github.com/andrsj/go_anime_crud/internal/rest/api"
-	"github.com/andrsj/go_anime_crud/internal/service"
+	"github.com/andrsj/go_anime_crud/internal/delivery/rest/api"
+	"github.com/andrsj/go_anime_crud/internal/domain/repository/memory"
+	anime_service "github.com/andrsj/go_anime_crud/internal/services/anime"
 	"github.com/andrsj/go_anime_crud/pkg/logger/zerolog"
 )
 
 func main() {
 
-	// Setup logger
-	l := zerolog.New()
+	log := zerolog.New()
 
-	// Setup service
-	repo, err := memory.New(l)
+	repository, err := memory.New(log)
 	if err != nil {
 		return
 	}
 
-	s, err := service.New(l, repo)
-	if err != nil {
-		l.Error("Error while setting up the services")
-		return
-	}
+	service_app := anime_service.New(log, repository)
 
-	// Setup server side handler
-	a := api.New(s, l)
+	api_router := api.New(service_app, log)
 
-	l.Info("Setting up the Echo instance")
-	e := echo.New()
+	echo_router := echo.New()
 
-	e.GET("/", a.Status)
+	echo_router.GET("/", api_router.Status)
 
-	e.POST("/api/ac", a.CreateAnimeCharacter)
-	e.GET("/api/ac/:id", a.GetAnimeCharacter)
-	e.GET("/api/ac/", a.GetAllAnimeCharacters)
-	e.PUT("/api/ac/:id", a.UpdateAnimeCharacter)
-	e.DELETE("/api/ac/:id", a.DeleteAnimeCharacter)
+	echo_router.POST("/api/ac", api_router.CreateAnimeCharacter)
+	echo_router.GET("/api/ac/:id", api_router.GetAnimeCharacter)
+	echo_router.GET("/api/ac/", api_router.GetAllAnimeCharacters)
+	echo_router.PUT("/api/ac/:id", api_router.UpdateAnimeCharacter)
+	echo_router.DELETE("/api/ac/:id", api_router.DeleteAnimeCharacter)
 
 	app, err := app.NewAppBuilder().
-		WithLogger(l).
-		WithService(s).
-		WithAPI(a).
-		WithEcho(e).
+		WithLogger(log).
+		WithService(service_app).
+		WithAPI(api_router).
+		WithEcho(echo_router).
 		Build()
 
 	if err != nil {
-		l.Fatal(fmt.Sprintf("App can't be created, error: %s", err))
+		log.Fatal(fmt.Sprintf("App can't be created, error: %s", err))
 	}
 
 	if err := app.Run(); err != nil {
-		l.Fatal(fmt.Sprintf("App exited with error: %s", err))
+		log.Fatal(fmt.Sprintf("App exited with error: %s", err))
 	}
 }

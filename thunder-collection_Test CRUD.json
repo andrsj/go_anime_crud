@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Test CRUD",
-    "dateExported": "2023-02-22T14:26:14.707Z",
+    "dateExported": "2023-02-22T17:30:09.301Z",
     "version": "1.1",
     "folders": [
         {
@@ -214,11 +214,11 @@
             "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
             "containerId": "4359d1b2-b05b-414b-ad2d-16ea52bd83b3",
             "name": "GET AC Bad",
-            "url": "{{URL}}{{API}}/1",
+            "url": "{{URL}}{{API}}/a",
             "method": "GET",
             "sortNum": 70000,
             "created": "2023-02-22T14:23:55.516Z",
-            "modified": "2023-02-22T14:23:58.465Z",
+            "modified": "2023-02-22T17:29:19.745Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -228,11 +228,11 @@
             "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
             "containerId": "ae8c7b2c-1c3b-4b17-9bc3-a52ba985bc72",
             "name": "PUT AC Bad",
-            "url": "{{URL}}{{API}}/2",
+            "url": "{{URL}}{{API}}/a",
             "method": "PUT",
             "sortNum": 70000,
             "created": "2023-02-22T14:24:40.939Z",
-            "modified": "2023-02-22T14:24:40.939Z",
+            "modified": "2023-02-22T17:29:09.820Z",
             "headers": [],
             "params": [],
             "body": {
