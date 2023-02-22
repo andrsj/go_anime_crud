@@ -1,40 +1,18 @@
 package app
 
 import (
-	"github.com/andrsj/go_anime_crud/internal/app/service"
-	"github.com/andrsj/go_anime_crud/internal/http/endpoint"
-	"github.com/andrsj/go_anime_crud/pkg/logger"
 	"github.com/labstack/echo/v4"
+
+	"github.com/andrsj/go_anime_crud/internal/delivery/rest/api"
+	"github.com/andrsj/go_anime_crud/internal/services/anime"
+	"github.com/andrsj/go_anime_crud/pkg/logger"
 )
 
 type App struct {
-	logger   logger.Interface
-	service  service.Interface
-	endpoint *endpoint.Endpoint
-	echo     *echo.Echo
-}
-
-func New() (*App, error) {
-	var err error
-	a := &App{}
-
-	a.logger = logger.New("Info")
-	a.logger.Info("Binding logger to application")
-
-	a.service, err = service.New()
-	if err != nil {
-		a.logger.Error("Error while setting up the services")
-		return nil, err
-	}
-
-	a.endpoint = endpoint.New(a.service, a.logger)
-
-	a.logger.Info("Setting up the Echo instance")
-	a.echo = echo.New()
-
-	a.echo.GET("/", a.endpoint.Status)
-
-	return a, nil
+	api           *api.API
+	echo          *echo.Echo
+	logger        logger.Interface
+	anime_service anime.Interface
 }
 
 func (a *App) Run() error {
@@ -42,7 +20,7 @@ func (a *App) Run() error {
 
 	err := a.echo.Start(":8080")
 	if err != nil {
-		a.logger.Fatal(err)
+		a.logger.Fatal(err.Error())
 	}
 
 	return nil

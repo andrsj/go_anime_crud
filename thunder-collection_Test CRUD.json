@@ -1,0 +1,247 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Test CRUD",
+    "dateExported": "2023-02-22T17:30:09.301Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "09bec467-2ba9-4023-a6db-561d189ff30d",
+            "name": "POST",
+            "containerId": "",
+            "created": "2023-02-22T14:09:19.567Z",
+            "sortNum": 10000,
+            "settings": {}
+        },
+        {
+            "_id": "4359d1b2-b05b-414b-ad2d-16ea52bd83b3",
+            "name": "GET",
+            "containerId": "",
+            "created": "2023-02-22T14:09:46.465Z",
+            "sortNum": 15000
+        },
+        {
+            "_id": "ae8c7b2c-1c3b-4b17-9bc3-a52ba985bc72",
+            "name": "PUT",
+            "containerId": "",
+            "created": "2023-02-22T14:13:55.628Z",
+            "sortNum": 17500
+        },
+        {
+            "_id": "c221fdb8-2270-4d2b-b7ef-ec7a99b85973",
+            "name": "DELETE",
+            "containerId": "",
+            "created": "2023-02-22T14:09:33.325Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "dbd1df10-5e7c-448a-9191-4071650abeeb",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "c221fdb8-2270-4d2b-b7ef-ec7a99b85973",
+            "name": "Delete AC #1",
+            "url": "{{URL}}{{API}}/1",
+            "method": "DELETE",
+            "sortNum": 5000,
+            "created": "2023-02-22T14:08:22.760Z",
+            "modified": "2023-02-22T14:25:05.721Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d1307425-38e7-4bbe-8156-2f1a74dad533",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "",
+            "name": "Status",
+            "url": "{{URL}}",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-02-22T13:59:12.560Z",
+            "modified": "2023-02-22T13:59:19.404Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c702e347-bfa7-420a-9a58-cd7840f61e0c",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "09bec467-2ba9-4023-a6db-561d189ff30d",
+            "name": "POST AC #1",
+            "url": "{{URL}}{{API}}",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-02-22T13:59:49.941Z",
+            "modified": "2023-02-22T14:09:25.359Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{{user1}}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0ac59750-bd16-4119-b9c8-bdbed415bb0a",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "c221fdb8-2270-4d2b-b7ef-ec7a99b85973",
+            "name": "Delete AC #2",
+            "url": "{{URL}}{{API}}/2",
+            "method": "DELETE",
+            "sortNum": 10000,
+            "created": "2023-02-22T14:09:00.957Z",
+            "modified": "2023-02-22T14:09:35.437Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "20e5d389-2109-49ec-b076-e702052da794",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "09bec467-2ba9-4023-a6db-561d189ff30d",
+            "name": "POST AC #2",
+            "url": "{{URL}}{{API}}",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-02-22T14:07:44.372Z",
+            "modified": "2023-02-22T14:09:26.511Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{{user2}}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "71db1bad-de2b-4eee-85ac-e2d7457b3939",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "c221fdb8-2270-4d2b-b7ef-ec7a99b85973",
+            "name": "Delete AC Bad",
+            "url": "{{URL}}{{API}}/2",
+            "method": "DELETE",
+            "sortNum": 20000,
+            "created": "2023-02-22T14:25:07.267Z",
+            "modified": "2023-02-22T14:25:07.267Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d766143d-d697-4893-a716-9d1692786dc6",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "4359d1b2-b05b-414b-ad2d-16ea52bd83b3",
+            "name": "GET ALL",
+            "url": "{{URL}}{{API}}/",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-02-22T14:09:53.127Z",
+            "modified": "2023-02-22T14:10:23.826Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9385ba09-f40f-476f-9ab2-b559467a3c52",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "4359d1b2-b05b-414b-ad2d-16ea52bd83b3",
+            "name": "GET AC #1",
+            "url": "{{URL}}{{API}}/1",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-02-22T14:10:28.253Z",
+            "modified": "2023-02-22T14:10:42.779Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "51f674b5-67c6-41dc-8ebe-9ec84210cd1c",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "ae8c7b2c-1c3b-4b17-9bc3-a52ba985bc72",
+            "name": "PUT AC #1",
+            "url": "{{URL}}{{API}}/1",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-02-22T14:14:06.562Z",
+            "modified": "2023-02-22T14:14:31.095Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{{user1.1}}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "50a4f5ad-172a-47b4-9b6f-d26d530f7454",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "4359d1b2-b05b-414b-ad2d-16ea52bd83b3",
+            "name": "GET AC #2",
+            "url": "{{URL}}{{API}}/2",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-02-22T14:10:49.301Z",
+            "modified": "2023-02-22T14:10:58.952Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "addfe87b-2198-4155-8a71-0347f76f1622",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "ae8c7b2c-1c3b-4b17-9bc3-a52ba985bc72",
+            "name": "PUT AC #2",
+            "url": "{{URL}}{{API}}/2",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2023-02-22T14:15:45.051Z",
+            "modified": "2023-02-22T14:16:08.749Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{{user2.2}}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "1880a0d7-770b-4e98-95c6-27e65e6d68f4",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "4359d1b2-b05b-414b-ad2d-16ea52bd83b3",
+            "name": "GET AC Bad",
+            "url": "{{URL}}{{API}}/a",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-02-22T14:23:55.516Z",
+            "modified": "2023-02-22T17:29:19.745Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6b9e969e-7a40-41ad-b930-8be7e7dfea82",
+            "colId": "bc4cb766-5cc2-4b68-a2dc-c3ecf7f4be6d",
+            "containerId": "ae8c7b2c-1c3b-4b17-9bc3-a52ba985bc72",
+            "name": "PUT AC Bad",
+            "url": "{{URL}}{{API}}/a",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2023-02-22T14:24:40.939Z",
+            "modified": "2023-02-22T17:29:09.820Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{{user2.2}}",
+                "form": []
+            },
+            "tests": []
+        }
+    ],
+    "settings": {}
+}

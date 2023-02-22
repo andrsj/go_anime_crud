@@ -1,0 +1,40 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "Test CRUD",
+    "dateExported": "2023-02-22T14:26:20.724Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "HOST",
+            "value": "http://localhost"
+        },
+        {
+            "name": "PORT",
+            "value": "8080"
+        },
+        {
+            "name": "URL",
+            "value": "{{HOST}}:{{PORT}}"
+        },
+        {
+            "name": "API",
+            "value": "/api/ac"
+        },
+        {
+            "name": "user1",
+            "value": "{\"id\": 1, \"name\": \"Andrii\", \"age\": 24, \"desc\": \"Golang developer\"}"
+        },
+        {
+            "name": "user1.1",
+            "value": "{\"id\": 1, \"name\": \"Andrii\", \"age\": 22, \"desc\": \"Python developer\"}"
+        },
+        {
+            "name": "user2",
+            "value": "{\"id\": 2, \"name\": \"Lida\", \"age\": 22, \"desc\": \"Andrii's wife\"}"
+        },
+        {
+            "name": "user2.2",
+            "value": "{\"id\": 2, \"name\": \"Lidia\", \"age\": 22, \"desc\": \"Andrii's wife\"}"
+        }
+    ]
+}
